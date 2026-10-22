@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>International Cell – LBRCE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,500&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --top:#0c7ba8; --nav:#0c7ba8; --flash:#0a5aa8; --navy:#0b2a5b; --light:#d9edf7; --yellow:#f5b400; --red:#dc3545; --pink:#f0145a;
+  --text:#000; --bg:#fff; --card:#fff; --line:#d5e3ee; --muted:#444; --head:#0b2a5b;
+  color-scheme:light; box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 60px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.7 Roboto,Arial,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--nav);z-index:30}
+h1,h2,h3{font-family:Rubik,Roboto,Arial,sans-serif;margin:0;line-height:1.25}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+/* top info bar */
+.top{background:var(--top);color:#fff;font-weight:500;font-size:.92rem}
+.top .in{max-width:1200px;margin:auto;padding:.6rem 1.2rem;display:flex;flex-wrap:wrap;gap:.4rem 2rem;align-items:center}
+.top a{text-decoration:none}.top a:hover{text-decoration:underline}
+.top .code{margin-left:auto;color:#ffe45c;font-style:italic;font-weight:700}
+
+/* college banner image */
+.banner{background:#fff;border-bottom:1px solid var(--line)}
+.banner img{display:block;width:100%;max-width:1400px;height:auto;margin:auto}
+@media (max-width:560px){.top .code{margin-left:0}}
+
+/* nav */
+nav.bar{background:var(--nav);position:sticky;top:env(safe-area-inset-top,0px);z-index:40}
+.bar .in{max-width:1200px;margin:auto;display:flex;justify-content:center;flex-wrap:wrap}
+.bar a{color:#fff;text-decoration:none;text-transform:uppercase;font-weight:500;font-size:.95rem;padding:1rem 1.1rem;border-bottom:4px solid transparent}
+.bar a:hover{background:rgba(255,255,255,.12)}
+.bar a[aria-current="page"]{border-bottom-color:var(--yellow);background:rgba(0,0,0,.12)}
+#menu{display:none;width:100%;background:none;border:0;color:#fff;font:500 1rem Roboto,sans-serif;padding:.9rem 1.2rem;text-align:left;cursor:pointer;text-transform:uppercase}
+@media (max-width:860px){
+  #menu{display:block}
+  .bar .in{display:none;flex-direction:column}
+  .bar .in.open{display:flex}
+  .bar a{border-bottom:0;border-left:4px solid transparent;padding:.8rem 1.2rem}
+  .bar a[aria-current="page"]{border-left-color:var(--yellow)}
+}
+
+/* flash news */
+.flash{background:var(--flash);color:#fff;overflow:hidden}
+.flash .in{max-width:1200px;margin:auto;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem}
+.flash b{font:600 1.05rem Rubik,sans-serif;white-space:nowrap;display:flex;align-items:center;gap:.6rem}
+.flash b::after{content:"";border-left:16px solid var(--yellow);border-top:12px solid transparent;border-bottom:12px solid transparent}
+.flash .m{flex:1;overflow:hidden;white-space:nowrap;font-weight:500;border-left:1px solid rgba(255,255,255,.4);padding-left:1rem}
+.flash .m span{display:inline-block;padding-left:100%;animation:slide 40s linear infinite}
+@keyframes slide{to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.flash .m span{animation:none;padding-left:0}.flash .m{white-space:normal}}
+@media (max-width:560px){.flash b{font-size:.85rem}}
+
+/* hero */
+.hero{background:linear-gradient(100deg,var(--navy) 0 55%,var(--flash) 100%);color:#fff}
+.hero .in{max-width:1200px;margin:auto;padding:2.5rem 1.2rem;display:grid;grid-template-columns:1.1fr 1fr;gap:2rem;align-items:center}
+.hero h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:700}
+.hero p{max-width:46ch;margin:1rem 0 1.4rem;font-size:1.05rem}
+.btn{display:inline-block;background:var(--yellow);color:#000;font:600 .95rem Rubik,sans-serif;text-decoration:none;padding:.7rem 1.4rem;border-radius:4px;margin-right:.6rem}
+.btn.o{background:none;color:#fff;border:2px solid #fff}
+.hero svg{width:100%;max-width:420px;height:auto;justify-self:center}
+@media (max-width:860px){.hero .in{grid-template-columns:1fr}.hero svg{max-width:300px}}
+
+main{max-width:1100px;margin:auto;padding:3rem 1.2rem 4rem}
+.page{display:none}.page.on{display:block}
+.title{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:600;color:var(--head);border-left:6px solid var(--yellow);padding-left:.8rem;margin-bottom:1.4rem}
+h3{font-size:1.25rem;font-weight:600;color:var(--head);margin-bottom:.5rem}
+.lead{max-width:75ch;text-align:justify;hyphens:auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin:2.2rem 0}
+.rc{background:var(--red);color:#fff;border:3px solid var(--pink);display:flex;flex-direction:column}
+.rc h3{color:#fff;text-align:center;padding:.9rem;border-bottom:1px solid rgba(255,255,255,.35);font-size:1.4rem}
+.rc .b{padding:1.2rem 1.3rem;flex:1}
+.rc ul{padding-left:1.1rem;margin:.3rem 0}
+.rc a{color:#fff;font-weight:700}
+.rc .rank{display:inline-block;background:var(--yellow);color:#000;font-weight:700;padding:.1rem .7rem;border-radius:3px;margin-bottom:.6rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:var(--light);border-left:6px solid var(--yellow);padding:1rem 1.2rem}
+.stat b{display:block;font:600 2rem/1.1 Rubik,sans-serif;color:var(--head)}
+.band{background:var(--light);padding:1.8rem 1.5rem;margin:2.2rem 0;border-top:4px solid var(--flash)}
+ul.tick{list-style:none;padding:0;margin:.6rem 0}
+ul.tick li{padding:.3rem 0 .3rem 1.7rem;position:relative;max-width:75ch}
+ul.tick li::before{content:"";position:absolute;left:0;top:.75rem;width:.8rem;height:.8rem;background:var(--yellow);border-radius:2px}
+ol.flow{list-style:none;counter-reset:s;padding:0;margin:1rem 0}
+ol.flow li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--line);align-items:center}
+ol.flow li::before{content:counter(s);background:var(--flash);color:#fff;font:600 1rem/2.2rem Rubik,sans-serif;text-align:center;width:2.2rem;height:2.2rem;border-radius:50%}
+.hl{color:var(--red);font-weight:700}
+mark{background:var(--yellow);color:#000;padding:0 .3rem;font-weight:500}
+
+.act{display:grid;grid-template-columns:210px 1fr;gap:1.5rem;padding:1.8rem 0;border-top:1px solid var(--line)}
+.act .when{font:600 1.2rem/1.3 Rubik,sans-serif;color:var(--flash);border-left:6px solid var(--yellow);padding-left:.8rem;align-self:start}
+.act .when small{display:block;font:500 .85rem Roboto,sans-serif;color:var(--muted);margin-top:.2rem}
+.act p{margin:.2rem 0 .6rem;max-width:72ch}
+@media (max-width:700px){.act{grid-template-columns:1fr;gap:.6rem}}
+.tbl{width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.95rem}
+.tbl th{background:var(--flash);color:#fff;text-align:left;padding:.55rem .8rem;font-family:Rubik,sans-serif;font-weight:500}
+.tbl td{padding:.45rem .8rem;border-bottom:1px solid var(--line)}
+.scroll{overflow-x:auto}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media (max-width:700px){.cols{grid-template-columns:1fr}}
+.target{background:var(--navy);color:#fff;padding:1.8rem 1.5rem;margin-top:1rem}
+.target h3{color:var(--yellow);font-size:1.4rem}
+footer{background:var(--navy);color:#fff;padding:1.5rem 1.2rem;text-align:center;font-size:.9rem}
+footer b{color:var(--yellow)}
+/* coordinators */
+.coord h2{text-align:center;font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:600;color:var(--navy);margin:2.5rem 0 1.5rem;padding-top:2rem;border-top:1px solid var(--line)}
+.coord .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,340px));gap:1.5rem;justify-content:center}
+.coord .person{border:1px solid var(--line);border-top:5px solid var(--yellow);padding:1.3rem;text-align:center;background:#fff}
+.coord .person img{width:100%;max-width:240px;aspect-ratio:3/4;object-fit:cover;display:block;margin:0 auto 1rem}
+.coord .person h3{color:var(--flash);font-size:1.35rem;padding-top:1rem;border-top:1px solid var(--line)}
+.coord .person p{margin:.3rem 0 0;color:var(--red);font:600 .95rem/1.5 Rubik,sans-serif}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <span>📞 Call us: 08659 - 222933</span>
+  <a href="https://lbrce.ac.in" target="_blank" rel="noopener">🌐 LBRCE Home</a>
+  <span class="code">College Code: 76</span>
+</div></div>
+
+<!-- COLLEGE BANNER: replace the src below with your banner image -->
+<div class="banner"><img id="banner-img" alt="Lakireddy Bali Reddy College of Engineering (Autonomous)" src="Lakireddy Bali Reddy College Banner.png"></div>
+
+<nav class="bar" aria-label="Main">
+  <button id="menu" aria-expanded="false" aria-controls="links">☰ &nbsp;International Cell Menu</button>
+  <div class="in" id="links">
+    <a href="#home" data-p="home">Home</a>
+    <a href="#about" data-p="about">About</a>
+    <a href="#mou" id="mou">MOU</a>
+    <a href="#collaboration" data-p="collaboration">University Collaboration</a>
+    <a href="#activities" data-p="activities">Activities</a>
+  </div>
+</nav>
+
+<div class="flash"><div class="in"><b>Flash News &amp; Notifications</b>
+  <div class="m"><span>MoUs signed with Universiti Sains Malaysia (30 July 2025) and AIMST University (31 July 2025) &nbsp;|&nbsp; Passport Mela: 250+ students received passports &nbsp;|&nbsp; Education Fair 2025 held on 17 September 2025 &nbsp;|&nbsp; IELTS training for 2025–26 completed</span></div>
+</div></div>
+
+<!-- HOME -->
+<section class="page" id="home">
+  <div class="hero"><div class="in">
+    <div>
+      <h2>International Cell</h2>
+      <p>The place to reach your dream destination. We connect LBRCE students and faculty with universities and research partners across the world.</p>
+      <!--<a class="btn" href="#about">About the Cell</a><a class="btn o" href="#activities">Activities 2025–26</a>-->
+    </div>
+    <svg viewBox="0 0 400 340" fill="none" aria-hidden="true">
+      <circle cx="200" cy="170" r="140" fill="#fff" opacity=".1"/>
+      <circle cx="200" cy="170" r="140" stroke="#fff" stroke-width="2"/>
+      <ellipse cx="200" cy="170" rx="140" ry="50" stroke="#fff" opacity=".5"/>
+      <ellipse cx="200" cy="170" rx="60" ry="140" stroke="#fff" opacity=".5"/>
+      <ellipse cx="200" cy="170" rx="105" ry="140" stroke="#fff" opacity=".35"/>
+      <g stroke="#f5b400" stroke-width="3" stroke-dasharray="6 6"><path d="M200 170 Q250 40 300 80"/><path d="M200 170 Q130 60 90 110"/><path d="M200 170 Q290 190 320 230"/><path d="M200 170 Q120 230 100 250"/></g>
+      <circle cx="200" cy="170" r="10" fill="#dc3545" stroke="#fff" stroke-width="3"/>
+      <g fill="#f5b400"><circle cx="300" cy="80" r="7"/><circle cx="90" cy="110" r="7"/><circle cx="320" cy="230" r="7"/><circle cx="100" cy="250" r="7"/></g>
+      <g fill="#fff" font-family="Roboto,sans-serif" font-size="13" font-weight="700"><text x="212" y="196">Mylavaram</text><text x="268" y="68">Malaysia</text><text x="48" y="98">UK</text><text x="300" y="256">NZ</text><text x="62" y="278">USA</text></g>
+    </svg>
+  </div></div>
+  <main>
+    <h2 class="title">International Cell</h2>
+    <p class="lead">To achieve excellence in multi-disciplinary areas, the International Cell (I Cell) aspires to establish significant academic and research links and collaborations with leading higher education institutes, universities and corporations across the world. <!--<a href="#about" style="color:#0000ee;font-weight:700">(Read more...)</a>--></p>
+    <div class="cards">
+      <div class="rc"><h3>Collaboration</h3><div class="b">Signed MoUs with Universiti Sains Malaysia and AIMST University for exchange, internships and joint research.<br><br><a href="#collaboration">View collaborations</a></div></div>
+      <div class="rc"><h3>Training</h3><div class="b">IELTS, TOEFL, PTE and GRE training, with discounts on test bookings, to remove the barriers to studying abroad.<br><br><a href="#activities">View activities</a></div></div>
+      <div class="rc"><h3>Guidance</h3><div class="b">Support from subject selection and statement of purpose to university choice and visa processing.<br><br><a href="#about">View process flow</a></div></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>3</b>International MoUs</div>
+      <div class="stat"><b>250+</b>passports through Passport Mela</div>
+      <div class="stat"><b>12</b>International institutions at Education Fair 2025</div>
+      <div class="stat"><b>30</b>students trained for IELTS</div>
+    </div>
+    <section class="coord">
+  <h2>I-Cell Coordinators</h2>
+  <div class="grid">
+    <div class="person">
+      <img src="rambabu.jpg" alt="Dr. L. Prabhu">
+      <h3>Dr. B. Rambabu</h3>
+      <p>Professor & HOD, Dept. of EIE<br>Coordinator - I-Cell</p>
+    </div>
+    <div class="person">
+      <img src="prabhu.jpg" alt="Coordinator name">
+      <h3>Dr. L. Prabhu</h3>
+      <p>Associate Professor, Dept. of ASE<br>Coordinator - I-Cell</p>
+    </div>
+  </div>
+</section>
+  </main>
+</section>
+
+<!-- ABOUT -->
+<section class="page" id="about"><main>
+  <h2 class="title">About Us</h2>
+  <h3>Objective</h3>
+  <p class="lead">To achieve excellence in multi-disciplinary areas, the International Cell (I Cell) aspires to establish significant academic and research links and collaborations with leading higher education institutes, universities and corporations across the world.</p>
+  <div class="band">
+    <h3>What does the Cell do?</h3>
+    <p class="lead">The goal of these international partnerships is to give our students the most enriching global academic exposure possible, closing the global knowledge gap. I Cell creates opportunities by organizing student exchange programs, internships, summer schools at international universities and more, so students can live and learn in cross-cultural settings and grow in academic rigor and cultural wisdom. These programs let students study at premier institutions in other countries, and the network they build will benefit them throughout their lives.</p>
+    <ul class="tick">
+      <li>Strategic alliances provide opportunities for engagement with overseas institutes and leading enterprises.</li>
+      <li>Academic coordination and research cooperation are established through a memorandum of understanding (MoU).</li>
+      <li>Final-year students get help to enter world-class universities, from subject selection to visa application.</li>
+      <li>Second, third and fourth-year students can join two-week or semester-long programs abroad more easily.</li>
+      <li>Training programs in English (IELTS / TOEFL / PTE), GRE and other courses remove the barriers to overseas higher education.</li>
+    </ul>
+  </div>
+  <h3>Process flow</h3>
+  <ol class="flow">
+    <li>I Cell notifies students about each international opportunity.</li>
+    <li>Students interested in overseas higher education register with I Cell.</li>
+    <li>Registered students are trained to succeed in the English and GRE exams.</li>
+    <li>I Cell helps them write their statement of purpose, which is critical for admission.</li>
+    <li>I Cell helps them choose their preferred degree and the best university based on QS rankings.</li>
+    <li>Each stage of the application is explained, and the status is communicated to them.</li>
+    <li>Once they receive an unconditional offer, I Cell helps with visa processing.</li>
+    <li>I Cell helps students complete a two-month internship or a one-semester program abroad.</li>
+  </ol>
+</main></section>
+
+<!-- COLLABORATION -->
+<section class="page" id="collaboration"><main>
+  <h2 class="title">University Collaboration</h2>
+  <p class="lead">Signed agreements that open exchange, internship and research routes for LBRCE students and faculty.</p>
+  <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    <div class="rc"><h3>Universiti Sains Malaysia</h3><div class="b"><span class="rank">QS Ranking 2026: 134</span><br>
+      <ul><li>Students exchange</li><li>Faculty exchange</li><li>Students internship</li><li>Joint conference, workshop and research</li></ul></div></div>
+    <div class="rc"><h3>AIMST University, Malaysia</h3><div class="b"><span class="rank">QS Asia University Ranking 2026: 78</span><br>
+      <ul><li>Students exchange</li><li>Faculty exchange</li><li>Students internship</li><li>Joint conference, workshop and research</li><li>Twinning, dual degree, credit transfer and more</li></ul></div></div>
+    <div class="rc"><h3>North Eastern University</h3><div class="b"><span class="rank">QS Ranking 2027: 385</span><br>
+      <ul><li>Higher Education</li><!--<li>Faculty exchange</li><li>Students internship</li><li>Joint conference, workshop and research</li>--></ul></div></div>
+    </div>
+</main></section>
+
+<!-- ACTIVITIES -->
+<section class="page" id="activities"><main>
+  <h2 class="title">Activities for AY 2025–26</h2>
+  <!--<p class="lead">Coordinated by Dr. L. Prabhu, Coordinator, I-Cell.</p>-->
+
+  <div class="act">
+    <div class="when">Passport Mela<small>29 &amp; 30 August 2025</small></div>
+    <div><p>Organized by the International Cell at the Placement Cell, so students could apply for passports on campus.</p>
+      <ul class="tick"><li><mark>250+ students</mark> applied and received passports.</li><li>Students saved a total of <mark>Rs. 1,25,000</mark>.</li></ul></div>
+  </div>
+
+  <div class="act">
+    <div class="when">Education Fair 2025<small>17 September 2025</small></div>
+    <div><p>Universities from seven regions met students on campus.</p>
+      <div class="cols">
+        <div class="scroll"><table class="tbl"><tr><th>Country</th><th>University</th></tr>
+          <tr><td>USA</td><td>Worcester Polytechnic Institute (WPI)</td></tr><tr><td>UK</td><td>University of Dundee</td></tr><tr><td>UK</td><td>University of York</td></tr><tr><td>UK</td><td>Birmingham City University</td></tr><tr><td>UK</td><td>University of Portsmouth</td></tr><tr><td>UK</td><td>University of Sunderland</td></tr></table></div>
+        <div class="scroll"><table class="tbl"><tr><th>Country</th><th>University</th></tr>
+          <tr><td>Canada</td><td>University of Canada West</td></tr><tr><td>New Zealand</td><td>University of Waikato</td></tr><tr><td>France</td><td>Rennes School of Business</td></tr><tr><td>France</td><td>ICN Business School</td></tr><tr><td>Denmark</td><td>University of Southern Denmark</td></tr><tr><td>Europe &amp; Asia</td><td>GEDU</td></tr><tr><td>Dubai</td><td>Curtin University Dubai</td></tr></table></div>
+      </div></div>
+  </div>
+
+  <div class="act">
+    <div class="when">IELTS Training<small>2025–26</small></div>
+    <div><h3>Training of faculty</h3>
+      <p>Two faculty from the FED department were trained and certified for IELTS by the <b>British Council</b>: Prof. Samrajya Lakshmi and Mr. V.V. Vamsi Krishna, Asst. Prof.</p>
+      <h3>Training offered to students</h3>
+      <ul class="tick"><li>One-month training program for final and pre-final year students.</li><li>Students applied: <mark>60</mark></li><li>Students trained: <mark>30</mark></li></ul></div>
+  </div>
+
+  <div class="act">
+    <div class="when">Higher Education &amp; Internship</div>
+    <div class="cols">
+      <div><h3>Higher education</h3><ul class="tick"><li>Europe: 1 student received an offer letter.</li><li>UK: 1 student applied for a visa.</li></ul>
+        <h3>English language test</h3><ul class="tick"><li>Booking, test center and discounts of up to Rs. 3,000.</li></ul>
+        <h3>GRE</h3><ul class="tick"><li>Booking and discounts of up to Rs. 5,000.</li></ul></div>
+      <div><h3>International internship</h3><ul class="tick"><li>Universiti Sains Malaysia: 1 student.</li></ul>
+        <h3>Abroad education consulting</h3><ul class="tick"><li>30 students consulted.</li></ul></div>
+    </div>
+  </div>
+
+  <!--<div class="act">
+    <div class="when">Centre of Excellence<small>Drone Technology</small></div>
+    <ul class="tick">
+      <li>Discussion is <span class="hl">completed</span>.</li>
+      <li>Investment of <span class="hl">50 lakhs</span> from the company.</li>
+      <li>Infrastructure provided by LBRCE.</li>
+      <li class="hl">Stage: with college management for execution.</li>
+      <li>Discussion with <span class="hl">Universiti Sains Malaysia</span> to collaborate in the Centre of Excellence.</li>
+    </ul>
+  </div>-->
+
+  <div class="target">
+    <h3>Targets for 2026–27</h3>
+    <ul class="tick">
+      <li>Sign MoUs with a minimum of two foreign universities.</li>
+      <li>Train a minimum of 150 students for the IELTS exam.</li>
+      <li>Higher education: 15 students.</li>
+      <li>International internship and project: 10 students.</li>
+      <li>University expo: 1 per semester.</li>
+      <li>Discounts in GRE / English proficiency tests: 30 students.</li>
+    </ul>
+  </div>
+</main></section>
+
+<footer><b>International Cell</b> · Lakireddy Bali Reddy College of Engineering (Autonomous), L.B. Reddy Nagar, Mylavaram, N.T.R. District, Andhra Pradesh – 521230</footer>
+
+<script>
+// Replace with the real MoU PDF link when ready, e.g. "https://yourcollege.edu/mou.pdf"
+var MOU_PDF_URL = "https://lbrce.ac.in/committees/iiic.php";
+
+var pages=["home","about","collaboration","activities"];
+function show(){
+  var h=(location.hash||"#home").slice(1); if(pages.indexOf(h)<0) h="home";
+  pages.forEach(function(p){document.getElementById(p).classList.toggle("on",p===h);});
+  document.querySelectorAll("nav a[data-p]").forEach(function(a){
+    if(a.dataset.p===h) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  document.getElementById("links").classList.remove("open");
+  document.getElementById("menu").setAttribute("aria-expanded","false");
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",show); show();
+document.getElementById("menu").addEventListener("click",function(){
+  var o=document.getElementById("links").classList.toggle("open"); this.setAttribute("aria-expanded",o);
+});
+function placeholderPdf(){
+  var s="BT /F1 24 Tf 72 700 Td (International Cell - LBRCE) Tj 0 -36 Td /F1 14 Tf (Placeholder MoU document. Replace with the signed MoU PDF.) Tj ET";
+  var o=["<< /Type /Catalog /Pages 2 0 R >>","<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>",
+    "<< /Length "+s.length+" >>\nstream\n"+s+"\nendstream","<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>"];
+  var p="%PDF-1.4\n",off=[];
+  o.forEach(function(b,i){off.push(p.length);p+=(i+1)+" 0 obj\n"+b+"\nendobj\n";});
+  var x=p.length; p+="xref\n0 6\n0000000000 65535 f \n";
+  off.forEach(function(v){p+=("0000000000"+v).slice(-10)+" 00000 n \n";});
+  p+="trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n"+x+"\n%%EOF";
+  return new Blob([p],{type:"application/pdf"});
+}
+document.getElementById("mou").addEventListener("click",function(e){
+  e.preventDefault();
+  window.open(MOU_PDF_URL||URL.createObjectURL(placeholderPdf()),"_blank","noopener");
+});
+</script>
+</body>
+</html>
